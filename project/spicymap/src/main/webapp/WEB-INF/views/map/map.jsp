@@ -41,10 +41,60 @@
 <style type="text/css">
     .buttons { position:absolute;top:0;left:0;z-index:1000;padding:5px; }
     .control-btn { margin:0 5px 5px 0; }
+    
+    
+    .header{
+        width: 100%;
+        height: 50px;
+        background-color: white;
+        margin : 5px 0;
+    }
+    .header div{
+    	display : inline-block;
+    }
+    #logo{
+    	height : 50px;
+    	padding-left : 20px;
+    }
+    #logo img{
+    	height : 100%;
+    }
+    #menus{
+    	display : float;
+    	margin-left : 0;
+    }
+    .menu svg{
+    	height : 50px;
+    	width : 30px;
+    	padding : 0 5px;
+    }
 </style>
 </head>
 <body>
-<div id="map" style="width:100%;height:600px;">
+<div class="header">
+    <div id="logo"><img src="/resources/image/logo_and_text.png"></div>
+    <div id="menus">
+        <div class="menu">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
+  			<path fill-rule="evenodd" d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z"/>
+  			<path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+			</svg></div>
+        <div class="menu">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+  			<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+			</svg>
+        </div>
+        <div class="menu">
+        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-images" viewBox="0 0 16 16">
+  			<path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+  			<path d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2zM14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1zM2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1h-10z"/>
+			</svg>
+        </div>
+    </div>
+</div>
+
+
+<div id="map" style="width:100%;height:500px;">
         <div class="buttons">
             <input id="to-busan" type="button" value="부산으로" class="control-btn" />
         </div>

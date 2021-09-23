@@ -25,7 +25,7 @@ public class MapController {
 	@RequestMapping("/init")
 	@ResponseBody
 	public List<Store> init(Model model){
-		//¿©±â¼­ºÎÅÍ °¡»ó µ¥ÀÌÅÍ
+		//ê°€ìƒë°ì´í„° ì‹œì‘
 		List<Store> list = new ArrayList<Store>();
 		Store l1 = new Store();
 		l1.setStorePointX("37.5666805");
@@ -36,7 +36,7 @@ public class MapController {
 		l2.setStorePointX("33.3590628");
 		l2.setStorePointY("126.534361");
 		list.add(l2);
-		//¿©±â±îÁö °¡»óµ¥ÀÌÅÍ
+		//ê°€ìƒë°ì´í„° ë
 		
 		return list;
 	}
