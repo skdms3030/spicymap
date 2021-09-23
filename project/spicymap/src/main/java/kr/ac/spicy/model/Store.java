@@ -5,15 +5,23 @@ public class Store {
 	private String storeImg;
 	private String storeTel;
 	private String storeAddress;
-	private String storePoint;
+	private String storePointX;
+	private String storePointY;
 	
 	
 	
-	public String getStorePoint() {
-		return storePoint;
+
+	public String getStorePointX() {
+		return storePointX;
 	}
-	public void setStorePoint(String storePoint) {
-		this.storePoint = storePoint;
+	public void setStorePointX(String storePointX) {
+		this.storePointX = storePointX;
+	}
+	public String getStorePointY() {
+		return storePointY;
+	}
+	public void setStorePointY(String storePointY) {
+		this.storePointY = storePointY;
 	}
 	public String getStoreName() {
 		return storeName;
