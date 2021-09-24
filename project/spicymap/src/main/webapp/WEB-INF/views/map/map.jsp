@@ -147,12 +147,12 @@ var map = new naver.maps.Map('map', mapOptions);
 
 
 
-//지도에 마크표시 대전
+/* //지도에 마크표시 대전
 var markerOptions = {
 		position : new naver.maps.LatLng(36.350698, 127.453216),
 		map : map
 };
-var marker = new naver.maps.Marker(markerOptions);
+var marker = new naver.maps.Marker(markerOptions); */
 
 //지도에 마크표시 부산
 var markerOptions = {

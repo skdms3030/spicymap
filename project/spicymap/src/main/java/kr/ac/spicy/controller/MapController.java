@@ -27,12 +27,12 @@ public class MapController {
 	public List<Store> init(Model model){
 		//가상데이터 시작
 		List<Store> list = new ArrayList<Store>();
-		Store l1 = new Store();
+		Store l1 = new Store();  //서울
 		l1.setStorePointX("37.5666805");
 		l1.setStorePointY("126.9784147");
 		list.add(l1);
 		
-		Store l2 = new Store();
+		Store l2 = new Store(); //제주
 		l2.setStorePointX("33.3590628");
 		l2.setStorePointY("126.534361");
 		list.add(l2);

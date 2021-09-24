@@ -8,6 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.ac.spicy.crawler.ImageCrawler;
+import kr.ac.spicy.crawler.NameCrawler;
+import kr.ac.spicy.crawler.SeleniumCrawler;
+import kr.ac.spicy.crawler.SeleniumCrawler2;
 import kr.ac.spicy.model.Store;
 
 @Controller
@@ -15,6 +19,10 @@ import kr.ac.spicy.model.Store;
 public class MainController {
 	@RequestMapping({"","/"})
 	public String home(Model model) {
+		SeleniumCrawler2 s = new SeleniumCrawler2();
+		
+		model.addAttribute("href", s.activateBot("고양이"));
+		
 		return "home";
 	}
 	
