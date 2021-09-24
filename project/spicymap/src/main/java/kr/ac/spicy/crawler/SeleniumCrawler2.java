@@ -42,24 +42,51 @@ public class SeleniumCrawler2 {
 			//크롬창에 url 넣기
 			driver.get(url);
 			
-			//구글이미지 검색에서 검색어 넣어서 검색 실행
+			//검색창의 name을 넣어줌
 			WebElement elem = driver.findElement(By.name("search_query"));
+				//검색창에 입력할 키원드
 				elem.sendKeys("고양이");
 				elem.submit();				
 			
 				
-			//img 태그의 rg_i 클래스를 가진 요소 선택
-			elements = driver.findElements(By.cssSelector("ytd-video-renderer"));  //아이디가 thumbnail인것을 선택		
+			//태그가 ytd-video-renderer인것을 선택해서 elements로 선언
+			elements = driver.findElements(By.cssSelector("ytd-video-renderer"));  
 			
+			/*
+			//elements 리스트들을 하나씩 볼 건데 그 하나들을 e라고 부르겠음
 			for(WebElement e : elements) {
 				Crawler c = new Crawler();
+				//element 안에서 아이디가 thumbnail인것을 선택해서 el로 선언
 				WebElement el = e.findElement(By.cssSelector("#thumbnail"));
+				//el에서 href라는 속성을 crawler의 href 속성으로 set해줌
 				c.setHref(el.getAttribute("href"));
+				//el안에서 아이디가 img인것을 찾고 그것의 src 속성을 crawler의 img 속성으로 set
 				c.setImg(el.findElement(By.cssSelector("#img")).getAttribute("src"));
+				//e안에서 아이디가 video-title인 것을 찾고 그것의 title을 crawler의 title로 set
 				c.setTitle(e.findElement(By.cssSelector("#video-title")).getAttribute("title"));
+				//지금 set한 한 세트를 리스트에 추가해줌
 				list.add(c);
-				
 			}
+			*/
+			
+			//list의 길이를 3으로 제한
+			for(int i=0; i<3; i++) {
+				Crawler c = new Crawler();
+				//elements중 i번째를 e로 선언
+				WebElement e = elements.get(i);
+				//element 안에서 아이디가 thumbnail인것을 선택해서 el로 선언
+				WebElement el = e.findElement(By.cssSelector("#thumbnail"));
+				//el에서 href라는 속성을 crawler의 href 속성으로 set해줌
+				c.setHref(el.getAttribute("href"));
+				//el안에서 아이디가 img인것을 찾고 그것의 src 속성을 crawler의 img 속성으로 set
+				c.setImg(el.findElement(By.cssSelector("#img")).getAttribute("src"));
+				//e안에서 아이디가 video-title인 것을 찾고 그것의 title을 crawler의 title로 set
+				c.setTitle(e.findElement(By.cssSelector("#video-title")).getAttribute("title"));
+				//지금 set한 한 세트를 리스트에 추가해줌
+				list.add(c);
+			}
+			
+			
 			
 			//src 리스트 반환
 			return list;

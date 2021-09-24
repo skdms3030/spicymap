@@ -16,11 +16,9 @@
 			<p>등록된 목록이 없습니다.</p>
 		</div>
 	</c:if>
-	<c:forEach var="img" items="${img}">
-	<c:forEach var="href" items="${href}">
-		<a href="${href}"><img src="${img}"></a>
-		<br>
-	</c:forEach>
+	<c:forEach var="list" items="${list}">
+		<a href="${list.href}"><img src="${list.img}"></a>
+		<p>"${list.title}"</p>
 	</c:forEach>	
 	
 		<%-- <p>${item.storeName}</p>

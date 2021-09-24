@@ -21,7 +21,7 @@ public class MainController {
 	public String home(Model model) {
 		SeleniumCrawler2 s = new SeleniumCrawler2();
 		
-		model.addAttribute("href", s.activateBot("고양이"));
+		model.addAttribute("list", s.activateBot("고양이"));
 		
 		return "home";
 	}
