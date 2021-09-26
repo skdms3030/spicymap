@@ -18,10 +18,7 @@ import kr.ac.spicy.model.Store;
 @RequestMapping({"","/"})
 public class MainController {
 	@RequestMapping({"","/"})
-	public String home(Model model) {
-		SeleniumCrawler2 s = new SeleniumCrawler2();
-		
-		model.addAttribute("list", s.activateBot("고양이"));
+	public String home() {
 		
 		return "home";
 	}

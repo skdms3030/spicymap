@@ -13,26 +13,62 @@
 	
 	<script>
 		$().ready(()=>{
+			var i;
+					var arr = new Array();
+			/* 모달 */
+/* 				  $("button").click(function(){
+				    $(".modal").fadeIn();
+				  });
+				  
+				  $(".modal_content").click(function(){
+				    $(".modal").fadeOut();
+				  }); */
+				  
 			
 			$.ajax({
 				url : "/map/init",
 				success : function(data){
 					
-					for(var i=0; i<data.length; i++){
+					
+					for(i=0; i<data.length; i++){
 						console.log(data[i].storePointX +" , " +data[i].storePointY);
+						console.log(i);
 						
-						var markerOptions = {
+/*  						var markerOptions = {
 								position : new naver.maps.LatLng(data[i].storePointX, data[i].storePointY),
-								map : map
-						};  //markerOptions 끝
+								map : map,
+								title : 'loc'
+						};  //markerOptions 끝 */
+						
+						var marker = new naver.maps.Marker({
+							position : new naver.maps.LatLng(data[i].storePointX, data[i].storePointY),
+							map : map,
+							title : 'loc_'+i,
+							});  //markerOptions 끝
 						
 						var marker = new naver.maps.Marker(markerOptions);
 						
+						arr[i] = marker; 
 						
 						
 						
-						//클릭 이벤트
-						var contentString = [
+						//모달 클릭 이벤트
+/* 						$("#map").on("click",$('div[title*="loc_"]'), function(){
+						    $(".modal").fadeIn();
+		 				    var tagId = $(this).attr('title');
+						    $(".modal_content").append($("<div>"+tagId+"</div>")) 
+						  }); */
+						  
+						  
+
+						
+						
+						
+						//$(arr[i]).attr('id','loc_'+i);
+						//$('div[style = "z-index: 103"]').attr('id','loc_'+i)
+						
+						//클릭 이벤트안에 들어가는 것
+/*  						var contentString = [
 					        '<div class="iw_inner">',
 					        '   <h3>서울특별시청</h3>',
 					        '   <p>서울특별시 중구 태평로1가 31 | 서울특별시 중구 세종대로 110 서울특별시청<br />',
@@ -44,27 +80,64 @@
 
 					var infowindow = new naver.maps.InfoWindow({
 					    content: contentString
-					});
-
-					naver.maps.Event.addListener(marker, "click", function(e) {
-					    if (infowindow.getMap()) {
+					});  */
+					
+					//클릭이벤트
+					//naver.maps.Event.addListener(marker, "click", function(e) {
+/* 					naver.maps.Event.addListener(arr[i], "click", function(e) {	
+						
+ 					    if (infowindow.getMap()) {
 					        infowindow.close();
 					    } else {
-					        infowindow.open(map, marker);
+					    	infowindow.open(map, marker);
 					    }
-					});
+					}); 
+					*///이벤트 끝
 					
-					
+					//클릭이벤트
+/* 					$("#map").on("click","loc_"+i, function(){
+						$(".modal").fadeIn();
+					  });
+					  
+					$("#map").on("click",".modal_content", function(){
+						$(".modal").fadeOut();
+					  }); */
+					  
+
 					
 					
 					}//for 끝
+					
+					//모달 클릭 이벤트
+					  $('div[title*="loc_"]').click(function(){
+						  	$(".modal_incontent").empty();
+						    $(".modal").fadeIn();
+						    var tagId = $(this).attr('title');
+						    $(".modal_incontent").append($("<div>"+tagId+"</div>")) 
+						  });
+					  
+					$(".close").click(function(){
+						$(".modal").fadeOut();
+					});
 					
 					
 				}//success 끝
 			})//ajax 끝
 			
+			/* 모달 */
+/*  				$("#map").on("click",$('div[title="loc_"+i]'), function(){
+				    $(".modal").fadeIn();
+ 				    var tagId = $(this);
+				    $(".modal_content").append($("<div>"+tagId+"</div>")) 
+				  });
+				$(".close").click(function(){
+					$(".modal").fadeOut();
+				});  */
 			
-		$('')
+				
+
+				  
+		
 		});//레디 끝
 	</script>
 
@@ -72,7 +145,7 @@
     .buttons { position:absolute;top:0;left:0;z-index:1000;padding:5px; }
     .control-btn { margin:0 5px 5px 0; }
     
-    
+    /* 헤더 */
     .header{
         width: 100%;
         height: 50px;
@@ -98,6 +171,29 @@
     	width : 30px;
     	padding : 0 5px;
     }
+    
+    
+    /* 모달 */
+.modal{ 
+  position:absolute; width:100%; height:100%; background: rgba(0,0,0,0.2); top:0; left:0; display:none;
+}
+
+.modal_content{
+  width:90%; height:90%;
+  background:#fff; border-radius:10px;
+  position:absolute; top:5%; left:5%;
+  /* margin-top:-100px; margin-left:-200px; */
+  text-align:center;
+  box-sizing:border-box;  /*padding:74px 0;*/
+  line-height:23px; cursor:pointer;
+  z-index:2000;
+}
+.modal_incontent{padding: 74px 0;}
+.modal_content svg{width:30px; height:30px; position: absolute; right: 5%; top:10px;}
+button{ 
+  width:120px; height:30px; margin-top:-15px; margin-left:-60px;
+  line-height:15px; cursor:pointer;
+}
 </style>
 </head>
 <body>
@@ -123,12 +219,28 @@
     </div>
 </div>
 
-
+<!-- 지도 -->
 <div id="map" style="width:100%;height:500px;">
         <div class="buttons">
             <input id="to-busan" type="button" value="부산으로" class="control-btn" />
         </div>
 </div>
+
+<!-- 모달 -->
+<button>클릭하면 모달창</button>
+<div class="modal">
+
+  <div class="modal_content" title="클릭하면 창이 닫힙니다.">
+  <svg class="close" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+</svg>
+    <div class="modal_incontent">
+    내용
+    </div>
+  </div>
+</div>
+  
     
     
    
@@ -138,7 +250,7 @@
 //지도 시작시 기본 위치
 var mapOptions = {
     center: new naver.maps.LatLng(36.350698, 127.453216),
-    zoom: 10
+    zoom: 3
 };
 
 var map = new naver.maps.Map('map', mapOptions);
@@ -155,11 +267,30 @@ var markerOptions = {
 var marker = new naver.maps.Marker(markerOptions); */
 
 //지도에 마크표시 부산
-var markerOptions = {
-		position : new naver.maps.LatLng(35.1797865, 129.0750194),
+ var markerOptions = {
+/* 		position : new naver.maps.LatLng(35.1797865, 129.0750194),
 		map : map
-};
+		title */
+}; 
 var marker = new naver.maps.Marker(markerOptions);
+
+
+//범죄지도 따라하기
+/* var marker = new naver.maps.Marker({
+	position : new naver.maps.LatLng(37.3595704, 127.105399),
+	map : map,
+	title : '사기',
+	icon: {
+		content:[
+			'<div style="padding-top:5px; padding-bottom:5px; padding-left:5px; padding-right:5px; background-color:#d3cc07; color:white; text-align:center; border:1px solid #a09b07; border-radius:14px; opacity:75%">'+
+			'<div style="font-weight:bold; font-size:14px">사기</div>'+
+			'<div style="font-weight:normal; font-size:13px; margin-top:3px">2016-01-21<br/>09시13분</div>'+
+			'</div>'
+			].join(''),
+		size : new naver.maps.Size(38,58),
+		anchor : new naver.maps.Point(19,58),
+		}
+	}); */
 
 
 
@@ -178,7 +309,10 @@ var marker = new naver.maps.Marker(markerOptions);
         map: map,
         position: cityhall
     }); */
-var contentString = [
+    
+    
+    
+/* var contentString = [
         '<div class="iw_inner">',
         '   <h3>서울특별시청</h3>',
         '   <p>서울특별시 중구 태평로1가 31 | 서울특별시 중구 세종대로 110 서울특별시청<br />',
@@ -198,7 +332,7 @@ naver.maps.Event.addListener(marker, "click", function(e) {
     } else {
         infowindow.open(map, marker);
     }
-});
+}); */
 
 //infowindow.open(map, marker);
 
