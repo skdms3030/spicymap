@@ -45,7 +45,7 @@ public class SeleniumCrawler2 {
 			//검색창의 name을 넣어줌
 			WebElement elem = driver.findElement(By.name("search_query"));
 				//검색창에 입력할 키원드
-				elem.sendKeys("고양이");
+				elem.sendKeys(search);
 				elem.submit();				
 			
 				

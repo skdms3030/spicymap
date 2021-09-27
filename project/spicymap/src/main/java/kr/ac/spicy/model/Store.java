@@ -1,6 +1,7 @@
 package kr.ac.spicy.model;
 
 public class Store {
+	private int storeId;
 	private String storeName;
 	private String storeImg;
 	private String storeTel;
@@ -11,6 +12,13 @@ public class Store {
 	
 	
 
+
+	public int getStoreId() {
+		return storeId;
+	}
+	public void setStoreId(int storeId) {
+		this.storeId = storeId;
+	}
 	public String getStorePointX() {
 		return storePointX;
 	}

@@ -43,7 +43,7 @@
 						var marker = new naver.maps.Marker({
 							position : new naver.maps.LatLng(data[i].storePointX, data[i].storePointY),
 							map : map,
-							title : 'loc_'+i,
+							title : 'loc_'+data[i].storeId,
 							});  //markerOptions 끝
 						
 						var marker = new naver.maps.Marker(markerOptions);
@@ -108,17 +108,27 @@
 					
 					}//for 끝
 					
-					//모달 클릭 이벤트
+					//마커 클릭 이벤트
 					  $('div[title*="loc_"]').click(function(){
 						  	$(".modal_incontent").empty();
 						    $(".modal").fadeIn();
-						    var tagId = $(this).attr('title');
-						    $(".modal_incontent").append($("<div>"+tagId+"</div>")) 
-						  });
+						    var tagId = $(this).attr('title').split("_")[1];
+						    $(".modal_incontent").append($("<div>"+tagId+"</div>"));
+						    
+ 						    $.ajax({
+								url : "/map/inmodal",
+								data : tagId,  //내가 보내는 데이터
+								success : function(data){ 
+									console.log(data);
+								}
+						    });  //ajax 끝
+						    
+						  });  //마커클릭 이벤트 끝
 					  
+					//모달 닫기 클릭 이벤트
 					$(".close").click(function(){
 						$(".modal").fadeOut();
-					});
+					});  //모달 닫기 끝
 					
 					
 				}//success 끝

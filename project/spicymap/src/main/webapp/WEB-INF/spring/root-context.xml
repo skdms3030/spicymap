@@ -4,5 +4,24 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- 데이터 연결 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+		<!-- <property name="url" value="jdbc:mariadb://localhost:6033/pnpn"></property> -->
+		<property name="url" value="jdbc:mariadb://116.32.250.172:6033/pnpn"></property>
+		<property name="username" value="pnpn3030"></property>
+		<property name="password" value="pnpn960303"></property>
+	</bean>
+	
+	<!-- dataSource를 참고하여 데이터 설정 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" >
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+	</bean>
 		
+	<!-- SqlSessionFactory를 참고하여 sqlSession 생성 -->	
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" >
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+	</bean>
 </beans>
