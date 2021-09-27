@@ -7,9 +7,11 @@
 	
 	<!-- 데이터 연결 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
-		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+		<property name="driverClassName" value="org.mariadb.jdbc.Driver"></property>
+		<!-- <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property> -->
 		<!-- <property name="url" value="jdbc:mariadb://localhost:6033/pnpn"></property> -->
-		<property name="url" value="jdbc:mariadb://116.32.250.172:6033/pnpn"></property>
+		<property name="url" value="jdbc:mysql://116.32.250.172:6033/pnpn"></property>
+		<!-- <property name="url" value="jdbc:mariadb://116.32.250.172:6033/pnpn"></property> -->
 		<property name="username" value="pnpn3030"></property>
 		<property name="password" value="pnpn960303"></property>
 	</bean>

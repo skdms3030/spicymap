@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -68,10 +69,23 @@ public class MapController {
 	}
 	
 	
-	 @RequestMapping("/inmodal")
+/*	 @RequestMapping("/inmodal")
 	 @ResponseBody 
 	 public Store inmodal(Store storeId, Model model){
+		 System.out.println(storeId);
 		 Store storeInfo = service.store(storeId);
+		 System.out.println(storeInfo);
+		 
+		 return storeInfo;
+	 }*/
+	 
+	 @GetMapping("/inmodal")
+	 @ResponseBody 
+	 public Store inmodal(int storeId){
+		 System.out.println("storeId" + storeId);
+		 Store storeInfo = service.store(storeId);
+			/* System.out.println("storeName"+storeInfo.getStoreName()); */
+		 System.out.println("storeInfo"+storeInfo);
 		 
 		 return storeInfo;
 	 }

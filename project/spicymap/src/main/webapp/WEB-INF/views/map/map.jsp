@@ -113,13 +113,18 @@
 						  	$(".modal_incontent").empty();
 						    $(".modal").fadeIn();
 						    var tagId = $(this).attr('title').split("_")[1];
+						    console.log(tagId);
+						    
 						    $(".modal_incontent").append($("<div>"+tagId+"</div>"));
 						    
  						    $.ajax({
 								url : "/map/inmodal",
-								data : tagId,  //내가 보내는 데이터
-								success : function(data){ 
-									console.log(data);
+								data : {storeId:tagId},  //내가 보내는 데이터
+								dataType:"json",
+								contentType: "application/json",
+								method:"get",
+								success : function(storeInfo){ 
+									console.log(storeInfo.storeName);
 								}
 						    });  //ajax 끝
 						    

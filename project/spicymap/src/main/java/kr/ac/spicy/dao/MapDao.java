@@ -6,6 +6,6 @@ import kr.ac.spicy.model.Store;
 
 public interface MapDao {
 
-	Store store(Store storeId);
+	Store store(int storeId);
 
 }

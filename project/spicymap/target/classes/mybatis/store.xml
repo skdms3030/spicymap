@@ -6,6 +6,6 @@
 <mapper namespace="store">
 	<select id="select" resultType="Store">
 		select * from Store
-		where storeId = #{storeId}
+		where store_Id = #{storeId}
 	</select>
 </mapper>
