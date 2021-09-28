@@ -191,9 +191,26 @@ button{
 .store_modal .modal_web .img img{width:100%; display: inline-block;}
 a{text-decoration: none; color: black;}
 /* .modal_web .videoInfo{width:50%; height:170px;} */
-.store_modal .modal_web .title{width:60%; font-size:5px; padding:5px 0 10px 0; /*display: inline-block;*/ margin: 0 auto;}
+.store_modal .modal_web .title{width:60%; font-size:5px; padding:5px 0 10px 0; f/*display: inline-block;*/ margin: 0 auto;}
 
 
+/* 검색모달 */
+.search_modal { 
+  position:absolute; width:100%; height:100%; background: rgba(0,0,0,0.2); top:0; left:0; display:none;
+}
+
+.search_modal .modal_content{
+  width:90%; height:90%;
+  background:#fff; border-radius:10px;
+  position:absolute; top:5%; left:5%;
+  /* margin-top:-100px; margin-left:-200px; */
+  text-align:center;
+  box-sizing:border-box;  /*padding:74px 0;*/
+  line-height:15px; cursor:pointer;
+  z-index:2000;
+}
+.search_modal .modal_content .close_icon{width:30px; height:30px; position: absolute; right: 5%; top:10px;}
+.search_modal .modal_incontent{margin: auto 0;}
 
 
 </style>
@@ -252,15 +269,23 @@ a{text-decoration: none; color: black;}
 <div class="search_modal">
 
   <div class="modal_content" title="클릭하면 창이 닫힙니다.">
-<svg class="search_icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-</svg>
+
   <svg class="close_icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
   <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
   <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
 </svg>
     <div class="modal_incontent">
-    내용
+    	<select name='store'>
+  			<option value='' selected>-- 선택 --</option>
+  			<option value='storeName'>상점명</option>
+  			<option value='storeAddress'>주소</option>
+  			<option value='storeTel'>전화번호</option>
+  			<option value='storeCategory'>카테고리</option>
+		</select>
+		<input type="text" placeholder="검색어를 입력하세요">
+		<svg class="search_icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+  		<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+		</svg>
     </div>
   </div>
 </div>  

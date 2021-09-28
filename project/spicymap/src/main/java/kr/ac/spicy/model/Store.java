@@ -8,6 +8,7 @@ public class Store {
 	private String storeAddress;
 	private String storePointX;
 	private String storePointY;
+	private String storeCategory;
 	
 	
 	
