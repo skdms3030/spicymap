@@ -8,4 +8,8 @@ public interface MapService {
 
 	Store store(int storeId);
 
+	String storeName(int storeId);
+
+	List<Store> list();
+
 }

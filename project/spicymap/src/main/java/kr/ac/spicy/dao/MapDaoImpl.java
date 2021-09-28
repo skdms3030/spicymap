@@ -16,9 +16,18 @@ public class MapDaoImpl implements MapDao {
 
 	@Override
 	public Store store(int storeId) {
-		return sql.selectOne("store.select", storeId);
 		
+		return sql.selectOne("store.item", storeId);
 	}
-	
-	
+
+	@Override
+	public String storeName(int storeId) {
+		return sql.selectOne("store.storeName", storeId);
+	}
+
+	@Override
+	public List<Store> list() {
+		return sql.selectList("store.list");
+	}
+
 }

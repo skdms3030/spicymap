@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.ac.spicy.crawler.SeleniumCrawler2;
+import kr.ac.spicy.model.Crawler;
 import kr.ac.spicy.model.Store;
+import kr.ac.spicy.model.Video;
 import kr.ac.spicy.service.MapService;
 
 @Controller
@@ -33,6 +35,7 @@ public class MapController {
 	@ResponseBody
 	public List<Store> init(Model model){
 		//가상데이터 시작
+		/*
 		List<Store> list = new ArrayList<Store>();
 		Store l1 = new Store();  //서울
 		l1.setStoreId(1);
@@ -63,7 +66,12 @@ public class MapController {
 		l5.setStorePointX("35.078045");
 		l5.setStorePointY("129.068228");
 		list.add(l5);
+		*/
 		//가상데이터 끝
+		
+		List<Store> list = new ArrayList<Store>();
+		list = service.list();
+		System.out.println(list);
 		
 		return list;
 	}
@@ -80,25 +88,37 @@ public class MapController {
 	 }*/
 	 
 	 @GetMapping("/inmodal")
-	 @ResponseBody 
+	 @ResponseBody
 	 public Store inmodal(int storeId){
 		 System.out.println("storeId" + storeId);
 		 Store storeInfo = service.store(storeId);
-			/* System.out.println("storeName"+storeInfo.getStoreName()); */
-		 System.out.println("storeInfo"+storeInfo);
+		 System.out.println("storeName "+storeInfo.getStoreName());
+		 System.out.println("storeInfo "+storeInfo.getStoreId());
 		 
 		 return storeInfo;
 	 }
-	 
+	
+	
+	 @GetMapping("/video")
+	 @ResponseBody
+	 public List<Crawler> video(String storeName) {
+		 	System.out.println("crawler "+storeName);
+			SeleniumCrawler2 s = new SeleniumCrawler2();
+			List<Crawler> videoList = new ArrayList<Crawler>();
+			videoList = s.activateBot(storeName);
+			System.out.println("videoList "+videoList);
+			
+			return videoList;
+	 }
 	
 	
 	
-	@RequestMapping("/selenium")
+/*	@RequestMapping("/selenium")
 	public String selenium(Model model) {
 		SeleniumCrawler2 s = new SeleniumCrawler2();
 		
 		model.addAttribute("list", s.activateBot("고양이"));
 		
 		return path + "selenium";
-	}
+	}*/
 }

@@ -16,8 +16,19 @@ public class MapServiceImpl implements MapService {
 
 	@Override
 	public Store store(int storeId) {
+		
 		return dao.store(storeId);
 		
+	}
+
+	@Override
+	public String storeName(int storeId) {
+		return dao.storeName(storeId);
+	}
+
+	@Override
+	public List<Store> list() {
+		return dao.list();
 	}
 
 }

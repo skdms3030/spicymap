@@ -14,16 +14,8 @@
 	<script>
 		$().ready(()=>{
 			var i;
-					var arr = new Array();
-			/* 모달 */
-/* 				  $("button").click(function(){
-				    $(".modal").fadeIn();
-				  });
-				  
-				  $(".modal_content").click(function(){
-				    $(".modal").fadeOut();
-				  }); */
-				  
+			var arr = new Array();
+
 			
 			$.ajax({
 				url : "/map/init",
@@ -34,88 +26,31 @@
 						console.log(data[i].storePointX +" , " +data[i].storePointY);
 						console.log(i);
 						
-/*  						var markerOptions = {
-								position : new naver.maps.LatLng(data[i].storePointX, data[i].storePointY),
-								map : map,
-								title : 'loc'
-						};  //markerOptions 끝 */
+						var id=i+1;
+						console.log(id);
+						
+						
 						
 						var marker = new naver.maps.Marker({
 							position : new naver.maps.LatLng(data[i].storePointX, data[i].storePointY),
 							map : map,
-							title : 'loc_'+data[i].storeId,
+							title : 'loc_'+id,
 							});  //markerOptions 끝
 						
 						var marker = new naver.maps.Marker(markerOptions);
 						
 						arr[i] = marker; 
-						
-						
-						
-						//모달 클릭 이벤트
-/* 						$("#map").on("click",$('div[title*="loc_"]'), function(){
-						    $(".modal").fadeIn();
-		 				    var tagId = $(this).attr('title');
-						    $(".modal_content").append($("<div>"+tagId+"</div>")) 
-						  }); */
-						  
-						  
 
-						
-						
-						
-						//$(arr[i]).attr('id','loc_'+i);
-						//$('div[style = "z-index: 103"]').attr('id','loc_'+i)
-						
-						//클릭 이벤트안에 들어가는 것
-/*  						var contentString = [
-					        '<div class="iw_inner">',
-					        '   <h3>서울특별시청</h3>',
-					        '   <p>서울특별시 중구 태평로1가 31 | 서울특별시 중구 세종대로 110 서울특별시청<br />',
-					        '       02-120 | 공공,사회기관 &gt; 특별,광역시청<br />',
-					        '       <a href="http://www.seoul.go.kr" target="_blank">www.seoul.go.kr/</a>',
-					        '   </p>',
-					        '</div>'
-					    ].join('');
-
-					var infowindow = new naver.maps.InfoWindow({
-					    content: contentString
-					});  */
-					
-					//클릭이벤트
-					//naver.maps.Event.addListener(marker, "click", function(e) {
-/* 					naver.maps.Event.addListener(arr[i], "click", function(e) {	
-						
- 					    if (infowindow.getMap()) {
-					        infowindow.close();
-					    } else {
-					    	infowindow.open(map, marker);
-					    }
-					}); 
-					*///이벤트 끝
-					
-					//클릭이벤트
-/* 					$("#map").on("click","loc_"+i, function(){
-						$(".modal").fadeIn();
-					  });
-					  
-					$("#map").on("click",".modal_content", function(){
-						$(".modal").fadeOut();
-					  }); */
-					  
-
-					
-					
 					}//for 끝
 					
 					//마커 클릭 이벤트
 					  $('div[title*="loc_"]').click(function(){
-						  	$(".modal_incontent").empty();
-						    $(".modal").fadeIn();
+						  	$(".store_modal .modal_incontent").empty();
+						    $(".store_modal").fadeIn();
 						    var tagId = $(this).attr('title').split("_")[1];
 						    console.log(tagId);
 						    
-						    $(".modal_incontent").append($("<div>"+tagId+"</div>"));
+						    //$(".modal_incontent").append($("<div>"+tagId+"</div>"));
 						    
  						    $.ajax({
 								url : "/map/inmodal",
@@ -125,14 +60,53 @@
 								method:"get",
 								success : function(storeInfo){ 
 									console.log(storeInfo.storeName);
+									$(".store_modal .modal_web").empty();
+									$(".store_modal .modal_incontent").append($("<div id='storeTitle' class='storeInfo'>가게명 : "+storeInfo.storeName+"</div>"));
+									$(".store_modal .modal_incontent").append($("<div id='storeAddress' class='storeInfo'>가게주소 : "+storeInfo.storeAddress+"</div>"));
+									$(".store_modal .modal_incontent").append($("<div id='storeTel' class='storeInfo'>가게 전화번호 : "+storeInfo.storeTel+"</div>"));
+									
+									var storeName = storeInfo.storeName;
+									var j;
+									$.ajax({
+										url : "/map/video",
+										data : {storeName : storeName},
+										dataType : "json",
+										contentType : "application/json",
+										method : "get",
+										success : function(videoList){
+											console.log(videoList);
+											
+											for(j=0; j<videoList.length; j++){
+											$(".store_modal .modal_web").append($("<a href='"+videoList[j].href+"'><div class='img'><img src='"+videoList[j].img+"'></div></a>"));
+											$(".store_modal .modal_web").append($("<a href='"+videoList[j].href+"'><div class='title'>"+videoList[j].title+"</div></a>"));
+											}
+											
+
+										} //success 끝
+									});  //in ajax 끝
 								}
 						    });  //ajax 끝
 						    
 						  });  //마커클릭 이벤트 끝
 					  
-					//모달 닫기 클릭 이벤트
-					$(".close").click(function(){
-						$(".modal").fadeOut();
+					//스토어모달 닫기 클릭 이벤트
+					$(".close_icon").click(function(){
+						$(".store_modal").fadeOut();
+					});  //모달 닫기 끝
+					
+					
+					
+					//검색창 모달 클릭 이벤트
+					$("#menus #search").click(function(){
+						$(".search_modal").fadeIn();
+					}); //검색모달 클릭 끝
+					
+					
+					
+					
+					//검색모달 닫기 클릭 이벤트
+					$(".close_icon").click(function(){
+						$(".search_modal").fadeOut();
 					});  //모달 닫기 끝
 					
 					
@@ -189,26 +163,39 @@
     
     
     /* 모달 */
-.modal{ 
+.store_modal { 
   position:absolute; width:100%; height:100%; background: rgba(0,0,0,0.2); top:0; left:0; display:none;
 }
 
-.modal_content{
+.store_modal .modal_content{
   width:90%; height:90%;
   background:#fff; border-radius:10px;
   position:absolute; top:5%; left:5%;
   /* margin-top:-100px; margin-left:-200px; */
   text-align:center;
   box-sizing:border-box;  /*padding:74px 0;*/
-  line-height:23px; cursor:pointer;
+  line-height:15px; cursor:pointer;
   z-index:2000;
 }
-.modal_incontent{padding: 74px 0;}
-.modal_content svg{width:30px; height:30px; position: absolute; right: 5%; top:10px;}
+.store_modal .modal_incontent{padding-top: 74px;}
+.store_modal .modal_content .close_icon{width:30px; height:30px; position: absolute; right: 5%; top:10px;}
 button{ 
   width:120px; height:30px; margin-top:-15px; margin-left:-60px;
   line-height:15px; cursor:pointer;
 }
+
+/* 모달 안 가게 정보 */
+.store_modal .modal_incontent .storeInfo{text-align: left; padding: 0 40px; margin: 3px 0; width:664.84px; font-size:5px; margin:0 auto;}
+.store_modal .modal_web{overflow:auto; width:90%; height:70%; position:absolute; top:150px; left:50%; transform:translate(-50%); display: inline-block;}
+.store_modal .modal_web .img{width:50%; display: inline-block;}
+.store_modal .modal_web .img img{width:100%; display: inline-block;}
+a{text-decoration: none; color: black;}
+/* .modal_web .videoInfo{width:50%; height:170px;} */
+.store_modal .modal_web .title{width:60%; font-size:5px; padding:5px 0 10px 0; /*display: inline-block;*/ margin: 0 auto;}
+
+
+
+
 </style>
 </head>
 <body>
@@ -220,7 +207,7 @@ button{
   			<path fill-rule="evenodd" d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z"/>
   			<path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
 			</svg></div>
-        <div class="menu">
+        <div class="menu" id="search">
         	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
   			<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
 			</svg>
@@ -241,12 +228,34 @@ button{
         </div>
 </div>
 
-<!-- 모달 -->
-<button>클릭하면 모달창</button>
-<div class="modal">
+<!-- 스토어모달 -->
+
+<div class="store_modal">
 
   <div class="modal_content" title="클릭하면 창이 닫힙니다.">
-  <svg class="close" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+  <svg class="close_icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+</svg>
+    <div class="modal_incontent">
+    내용
+    </div>
+    <div class="modal_web">
+    </div>
+  </div>
+</div>
+  
+ 
+
+<!-- 검색모달 -->
+
+<div class="search_modal">
+
+  <div class="modal_content" title="클릭하면 창이 닫힙니다.">
+<svg class="search_icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+</svg>
+  <svg class="close_icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
   <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
   <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
 </svg>
@@ -254,9 +263,7 @@ button{
     내용
     </div>
   </div>
-</div>
-  
-    
+</div>  
     
    
 <script id="code">

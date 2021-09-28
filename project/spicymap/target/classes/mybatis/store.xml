@@ -4,8 +4,17 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="store">
-	<select id="select" resultType="Store">
+	<select id="item" resultType="Store">
 		select * from Store
 		where store_Id = #{storeId}
+	</select>
+	
+	<select id="storeName" resultType="Int">
+		select store_name from Store
+		where store_Id = #{storeId}
+	</select>
+	
+	<select id="list" resultType="Store">
+		select store_PointX, store_PointY, store_Id from Store
 	</select>
 </mapper>
