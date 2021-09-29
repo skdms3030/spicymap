@@ -191,7 +191,7 @@ button{
 .store_modal .modal_web .img img{width:100%; display: inline-block;}
 a{text-decoration: none; color: black;}
 /* .modal_web .videoInfo{width:50%; height:170px;} */
-.store_modal .modal_web .title{width:60%; font-size:5px; padding:5px 0 10px 0; f/*display: inline-block;*/ margin: 0 auto;}
+.store_modal .modal_web .title{width:60%; font-size:5px; padding:5px 0 10px 0; /*display: inline-block;*/ margin: 0 auto;}
 
 
 /* 검색모달 */
@@ -239,10 +239,10 @@ a{text-decoration: none; color: black;}
 </div>
 
 <!-- 지도 -->
-<div id="map" style="width:100%;height:500px;">
-        <div class="buttons">
+<div id="map" style="width:100%;height:600px;">
+        <!-- <div class="buttons">
             <input id="to-busan" type="button" value="부산으로" class="control-btn" />
-        </div>
+        </div> -->
 </div>
 
 <!-- 스토어모달 -->
@@ -388,6 +388,7 @@ naver.maps.Event.addListener(marker, "click", function(e) {
 
 
 //부산 바로가기 버튼
+/* 
 var busan = new naver.maps.LatLng(35.1797865, 129.0750194);
 
 $("#to-busan").on("click", function(e) {
@@ -396,7 +397,7 @@ $("#to-busan").on("click", function(e) {
     map.panTo(busan);
    
 });
-
+ */
 
 
 </script>

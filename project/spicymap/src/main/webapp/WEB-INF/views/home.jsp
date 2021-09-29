@@ -9,26 +9,16 @@
 	<script src="/resources/jq/jquery.js"></script>
 </head>
 <body>
+
 <p>홈화면</p>
 <br>
-<%-- 	<c:if test="${list.size()<1}">
-		<div>
-			<p>등록된 목록이 없습니다.</p>
-		</div>
-	</c:if>
-	<c:forEach var="list" items="${list}">
-		<a href="${list.href}"><img src="${list.img}"></a>
-		<p>"${list.title}"</p>
-	</c:forEach> --%>	
-	
-		<%-- <p>${item.storeName}</p>
-		<p>${item.storeImg}</p>
-		<p>${item.storeTel}</p>
-		<p>${item.storeAddress}</p>
-		 --%>
-		 
-		 
+ 	
 	<a href="map/selenium"><p style="font-size:15px">웹크롤링</p></a>
 	<a href="map"><p style="font-size:15px">지도로</p></a>
+	<a href="naverLogin"><p style="font-size:15px">로그인</p></a>
+
+
+
+
 </body>
 </html>

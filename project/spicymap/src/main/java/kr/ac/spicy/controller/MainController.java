@@ -23,5 +23,10 @@ public class MainController {
 		return "home";
 	}
 	
+	@RequestMapping("/naverLogin")
+	public String login() {
+		return "naverlogin";
+	}
+	
 
 }
