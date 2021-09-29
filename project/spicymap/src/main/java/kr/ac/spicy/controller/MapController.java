@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.ac.spicy.crawler.SeleniumCrawler2;
 import kr.ac.spicy.model.Crawler;
+import kr.ac.spicy.model.Search;
 import kr.ac.spicy.model.Store;
 import kr.ac.spicy.model.Video;
 import kr.ac.spicy.service.MapService;
@@ -30,7 +32,15 @@ public class MapController {
 		return path + "map";
 	}
 	
+	@PostMapping("/search")
+	public String search(Model model, Search item) {
+		List<Store> list = new ArrayList<Store>();
+		list = service.search(item);
+		model.addAttribute(list);
+		return path + "search";
+	}
 	
+	//상점 좌표 리스트
 	@RequestMapping("/init")
 	@ResponseBody
 	public List<Store> init(Model model){
@@ -87,6 +97,7 @@ public class MapController {
 		 return storeInfo;
 	 }*/
 	 
+	//상점모달에 상점정보
 	 @GetMapping("/inmodal")
 	 @ResponseBody
 	 public Store inmodal(int storeId){
@@ -98,7 +109,8 @@ public class MapController {
 		 return storeInfo;
 	 }
 	
-	
+	 
+	 //상점 모달에 웹크롤링 결과
 	 @GetMapping("/video")
 	 @ResponseBody
 	 public List<Crawler> video(String storeName) {
@@ -112,7 +124,9 @@ public class MapController {
 	 }
 	
 	
-	
+
+	 
+	 
 /*	@RequestMapping("/selenium")
 	public String selenium(Model model) {
 		SeleniumCrawler2 s = new SeleniumCrawler2();

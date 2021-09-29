@@ -2,6 +2,7 @@ package kr.ac.spicy.service;
 
 import java.util.List;
 
+import kr.ac.spicy.model.Search;
 import kr.ac.spicy.model.Store;
 
 public interface MapService {
@@ -11,5 +12,7 @@ public interface MapService {
 	String storeName(int storeId);
 
 	List<Store> list();
+
+	List<Store> search(Search item);
 
 }

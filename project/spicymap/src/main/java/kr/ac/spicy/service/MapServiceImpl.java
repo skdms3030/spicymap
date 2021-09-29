@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.ac.spicy.dao.MapDao;
+import kr.ac.spicy.model.Search;
 import kr.ac.spicy.model.Store;
 
 @Service
@@ -29,6 +30,11 @@ public class MapServiceImpl implements MapService {
 	@Override
 	public List<Store> list() {
 		return dao.list();
+	}
+
+	@Override
+	public List<Store> search(Search item) {
+		return dao.search(item);
 	}
 
 }

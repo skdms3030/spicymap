@@ -159,6 +159,7 @@
     	height : 50px;
     	width : 30px;
     	padding : 0 5px;
+    	cursor:pointer;
     }
     
     
@@ -174,7 +175,7 @@
   /* margin-top:-100px; margin-left:-200px; */
   text-align:center;
   box-sizing:border-box;  /*padding:74px 0;*/
-  line-height:15px; cursor:pointer;
+  line-height:15px; /* cursor:pointer; */
   z-index:2000;
 }
 .store_modal .modal_incontent{padding-top: 74px;}
@@ -206,40 +207,21 @@ a{text-decoration: none; color: black;}
   /* margin-top:-100px; margin-left:-200px; */
   text-align:center;
   box-sizing:border-box;  /*padding:74px 0;*/
-  line-height:15px; cursor:pointer;
+  line-height:15px;
   z-index:2000;
 }
 .search_modal .modal_content .close_icon{width:30px; height:30px; position: absolute; right: 5%; top:10px;}
-.search_modal .modal_incontent{margin: auto 0;}
+.search_modal .modal_incontent{position:absolute; top:50%; left:50%; transform:translate(-50%, -50%);}
 
 
 </style>
 </head>
 <body>
-<div class="header">
-    <div id="logo"><img src="/resources/image/logo_and_text.png"></div>
-    <div id="menus">
-        <div class="menu">
-        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
-  			<path fill-rule="evenodd" d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z"/>
-  			<path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
-			</svg></div>
-        <div class="menu" id="search">
-        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-  			<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-			</svg>
-        </div>
-        <div class="menu">
-        	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-images" viewBox="0 0 16 16">
-  			<path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
-  			<path d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2zM14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1zM2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1h-10z"/>
-			</svg>
-        </div>
-    </div>
-</div>
+<!-- 헤더 -->
+<jsp:include page="../include/header.jsp"></jsp:include>
 
 <!-- 지도 -->
-<div id="map" style="width:100%;height:600px;">
+<div id="map" style="width:100%;height:500px;">
         <!-- <div class="buttons">
             <input id="to-busan" type="button" value="부산으로" class="control-btn" />
         </div> -->
@@ -249,7 +231,7 @@ a{text-decoration: none; color: black;}
 
 <div class="store_modal">
 
-  <div class="modal_content" title="클릭하면 창이 닫힙니다.">
+  <div class="modal_content" >
   <svg class="close_icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
   <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
   <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
@@ -274,22 +256,55 @@ a{text-decoration: none; color: black;}
   <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
   <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
 </svg>
+<form>
     <div class="modal_incontent">
+    
     	<select name='store'>
-  			<option value='' selected>-- 선택 --</option>
-  			<option value='storeName'>상점명</option>
-  			<option value='storeAddress'>주소</option>
-  			<option value='storeTel'>전화번호</option>
-  			<option value='storeCategory'>카테고리</option>
+  			<option value='0'>-- 선택 --</option>
+  			<option value='1' ${search.select == 1 ? 'selected' : '' }>상점명</option>
+  			<option value='2' ${search.select == 2 ? 'selected' : '' }>주소</option>
+  			<option value='3' ${search.select == 3 ? 'selected' : '' }>전화번호</option>
+  			<option value='4' ${search.select == 4 ? 'selected' : '' }>카테고리</option>
 		</select>
-		<input type="text" placeholder="검색어를 입력하세요">
+				<div class="col-5">
+					<input type="text" name="keyword" class="form-control form-control-sm" value="${search.keyword}">
+				</div>
+				<div class="col-2">
+					<input type="submit" value="검색" class="btn btn-primary btn-sm">
+				</div>
+			</div>
+<!-- 		<input type="text" placeholder="검색어를 입력하세요">
 		<svg class="search_icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
   		<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-		</svg>
+		</svg> -->
+		
     </div>
+</form>
   </div>
 </div>  
-    
+ 
+ 
+<!-- 검색 참고 -->
+<%-- 			<form>
+			<div class="row">
+				<div class="col-3"></div>
+				<div class="col-2">
+				<select name="search" class="form-control form-control-sm">
+					<option value="0">전체 검색</option>
+					<option value="1" ${pager.search == 1 ? 'selected' : '' }>도서번호</option>
+					<option value="2" ${pager.search == 2 ? 'selected' : '' }>도서명</option>
+					<option value="3" ${pager.search == 3 ? 'selected' : '' }>출판사</option>
+					<option value="4" ${pager.search == 4 ? 'selected' : '' }>가격</option>
+				</select>
+				</div>
+				<div class="col-5">
+					<input type="text" name="keyword" class="form-control form-control-sm" value="${pager.keyword}">
+				</div>
+				<div class="col-2">
+					<input type="submit" value="검색" class="btn btn-primary btn-sm">
+				</div>
+			</div>
+			</form>   --%> 
    
 <script id="code">
 
