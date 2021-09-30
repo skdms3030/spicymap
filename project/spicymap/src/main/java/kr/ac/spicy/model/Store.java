@@ -14,6 +14,12 @@ public class Store {
 	
 
 
+	public String getStoreCategory() {
+		return storeCategory;
+	}
+	public void setStoreCategory(String storeCategory) {
+		this.storeCategory = storeCategory;
+	}
 	public int getStoreId() {
 		return storeId;
 	}

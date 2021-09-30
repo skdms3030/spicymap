@@ -16,6 +16,7 @@
 	<typeAliases>
   		<typeAlias type="kr.ac.spicy.model.Store" alias="Store"/>
   		<typeAlias type="kr.ac.spicy.model.Crawler" alias="Crawler"/>
+  		<typeAlias type="kr.ac.spicy.model.Search" alias="Search"/>
   	</typeAliases>
 
 

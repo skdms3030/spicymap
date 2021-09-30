@@ -32,55 +32,48 @@ public class MapController {
 		return path + "map";
 	}
 	
-	@PostMapping("/search")
+	/*
+	//검색
+	@GetMapping("/search")
 	public String search(Model model, Search item) {
 		List<Store> list = new ArrayList<Store>();
+		System.out.println("item"+item);
 		list = service.search(item);
-		model.addAttribute(list);
+		System.out.println("list "+list);
+		model.addAttribute("list",list);
+		
 		return path + "search";
 	}
+	*/
+	
 	
 	//상점 좌표 리스트
 	@RequestMapping("/init")
 	@ResponseBody
 	public List<Store> init(Model model){
-		//가상데이터 시작
-		/*
-		List<Store> list = new ArrayList<Store>();
-		Store l1 = new Store();  //서울
-		l1.setStoreId(1);
-		l1.setStorePointX("37.5666805");
-		l1.setStorePointY("126.9784147");
-		list.add(l1);
-		
-		Store l2 = new Store(); //제주
-		l2.setStoreId(2);
-		l2.setStorePointX("33.3590628");
-		l2.setStorePointY("126.534361");
-		list.add(l2);
-		
-		Store l3 = new Store(); //청주 미친만두
-		l3.setStoreId(3);
-		l3.setStorePointX("36.662984");
-		l3.setStorePointY("127.473808");
-		list.add(l3);
-		
-		Store l4 = new Store(); //군산 지린성
-		l4.setStoreId(4);
-		l4.setStorePointX("35.979633");
-		l4.setStorePointY("126.713982");
-		list.add(l4);
-		
-		Store l5 = new Store(); //부산 영도불짬뽕
-		l5.setStoreId(5);
-		l5.setStorePointX("35.078045");
-		l5.setStorePointY("129.068228");
-		list.add(l5);
-		*/
-		//가상데이터 끝
+
 		
 		List<Store> list = new ArrayList<Store>();
 		list = service.list();
+		System.out.println(list);
+		
+		return list;
+	}
+	
+	
+	//상점 좌표 리스트
+	@GetMapping("/search")
+	@ResponseBody
+	public List<Store> init(Model model, int select, String keyword){
+		
+		Search keyword1 = new Search();
+		keyword1.setSelect(select);
+		keyword1.setKeyword(keyword);
+
+		
+		List<Store> list = new ArrayList<Store>();
+		list = service.searchList(keyword1);
+		//list = service.list();
 		System.out.println(list);
 		
 		return list;

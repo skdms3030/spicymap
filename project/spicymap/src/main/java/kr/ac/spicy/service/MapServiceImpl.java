@@ -37,4 +37,13 @@ public class MapServiceImpl implements MapService {
 		return dao.search(item);
 	}
 
+	@Override
+	public List<Store> searchList(Search keyword1) {
+		return dao.searchList(keyword1);
+	}
+
+
+
+
+
 }

@@ -31,9 +31,19 @@ public class MapDaoImpl implements MapDao {
 		return sql.selectList("store.list");
 	}
 
+	
 	@Override
 	public List<Store> search(Search item) {
 		return sql.selectList("store.search", item);
 	}
+
+	@Override
+	public List<Store> searchList(Search keyword1) {
+		return sql.selectList("store.searchList", keyword1);
+	}
+	
+
+
+
 
 }

@@ -15,4 +15,8 @@ public interface MapService {
 
 	List<Store> search(Search item);
 
+	List<Store> searchList(Search keyword1);
+
+
+
 }

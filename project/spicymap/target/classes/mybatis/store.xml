@@ -18,27 +18,52 @@
 		select store_PointX, store_PointY, store_Id from Store
 	</select>
 	
-	<sql id="search">
+	<select id="search" resultType="Store">
 		SELECT * FROM store
 		
 		<where>
-			<if test="search == 1">
+			<if test="select == 1">
 				store_Name LIKE CONCAT(CONCAT('%', #{keyword}), '%')
 			</if>
 			
-			<if test="search == 2">
+			<if test="select == 2">
 				store_Address LIKE CONCAT(CONCAT('%', #{keyword}), '%')
 			</if>
 			
-			<if test="search == 3">
+			<if test="select == 3">
 				store_Tel = #{keyword}
 			</if>
 			
-			<if test="search == 4">
+			<if test="select == 4">
 				store_Category LIKE CONCAT(CONCAT('%', #{keyword}), '%')
 			</if>
 		</where>
 		
 		ORDER BY store_Id
-	</sql>
+	</select>
+	
+	<select id="searchList" resultType="Store">
+				SELECT * FROM store
+		
+		<where>
+			<if test="select == 1">
+				store_Name LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+			</if>
+			
+			<if test="select == 2">
+				store_Address LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+			</if>
+			
+			<if test="select == 3">
+				store_Tel = #{keyword}
+			</if>
+			
+			<if test="select == 4">
+				store_Category LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+			</if>
+		</where>
+		
+		ORDER BY store_Id
+	</select>
+	
 </mapper>

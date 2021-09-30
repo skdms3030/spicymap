@@ -12,6 +12,13 @@
 	<script src="/resources/jq/jquery.js"></script>
 	
 	<script>
+	var state ={
+			select : 5,
+			keyword : "야호",
+			word : ""
+	}
+	
+	
 		$().ready(()=>{
 			var i;
 			var arr = new Array();
@@ -24,7 +31,7 @@
 					
 					for(i=0; i<data.length; i++){
 						console.log(data[i].storePointX +" , " +data[i].storePointY);
-						console.log(i);
+						//console.log(i);
 						
 						var id=i+1;
 						console.log(id);
@@ -34,17 +41,17 @@
 						var marker = new naver.maps.Marker({
 							position : new naver.maps.LatLng(data[i].storePointX, data[i].storePointY),
 							map : map,
-							title : 'loc_'+id,
+							title : 'loc_'+id
 							});  //markerOptions 끝
 						
-						var marker = new naver.maps.Marker(markerOptions);
+						/* var marker = new naver.maps.Marker(markerOptions);
 						
-						arr[i] = marker; 
+						arr[i] = marker;  */
 
 					}//for 끝
 					
 					//마커 클릭 이벤트
-					  $('div[title*="loc_"]').click(function(){
+					  $("#map").on("click", 'div[title*="loc_"]',function(){
 						  	$(".store_modal .modal_incontent").empty();
 						    $(".store_modal").fadeIn();
 						    var tagId = $(this).attr('title').split("_")[1];
@@ -61,7 +68,7 @@
 								success : function(storeInfo){ 
 									console.log(storeInfo.storeName);
 									$(".store_modal .modal_web").empty();
-									$(".store_modal .modal_incontent").append($("<div id='storeTitle' class='storeInfo'>가게명 : "+storeInfo.storeName+"</div>"));
+									$(".store_modal .modal_incontent").append($("<div id='storeTitle' class='storeInfo'>"+storeInfo.storeName+"</div>"));
 									$(".store_modal .modal_incontent").append($("<div id='storeAddress' class='storeInfo'>가게주소 : "+storeInfo.storeAddress+"</div>"));
 									$(".store_modal .modal_incontent").append($("<div id='storeTel' class='storeInfo'>가게 전화번호 : "+storeInfo.storeTel+"</div>"));
 									
@@ -108,6 +115,44 @@
 					$(".close_icon").click(function(){
 						$(".search_modal").fadeOut();
 					});  //모달 닫기 끝
+					
+					
+					//검색버튼 클릭 전송 이벤트
+					$("#submit").click(function(){
+						var map = new naver.maps.Map('map', mapOptions);
+						$(".search_modal").fadeOut(1);
+						state.select = $("select").val();
+						state.keyword = $(".searchKW").val();
+						console.log(state.select);
+						console.log(state.keyword);
+						
+						$.ajax({
+							url : "/map/search",
+							data : {select:state.select, keyword:state.keyword},
+							success : function(data){
+
+								for(i=0; i<data.length; i++){
+									console.log(data[i].storePointX +" , " +data[i].storePointY);
+									
+									var id=i+1;
+									console.log(id);
+									
+									var marker = new naver.maps.Marker({
+										position : new naver.maps.LatLng(data[i].storePointX, data[i].storePointY),
+										map : map,
+										title : 'loc_'+id
+										});  //markerOptions 끝
+									
+									/* var marker = new naver.maps.Marker(markerOptions);*/
+
+
+								}//for 끝
+							}
+							});  //ajax 끝
+					}); //검색버튼 클릭 전송 이벤트 끝
+					
+					
+					
 					
 					
 				}//success 끝
@@ -180,6 +225,7 @@
 }
 .store_modal .modal_incontent{padding-top: 74px;}
 .store_modal .modal_content .close_icon{width:30px; height:30px; position: absolute; right: 5%; top:10px;}
+.store_modal .modal_incontent #storeTitle{font-size:15px; font-weight:bold;}
 button{ 
   width:120px; height:30px; margin-top:-15px; margin-left:-60px;
   line-height:15px; cursor:pointer;
@@ -231,7 +277,7 @@ a{text-decoration: none; color: black;}
 
 <div class="store_modal">
 
-  <div class="modal_content" >
+  <div class="modal_content">
   <svg class="close_icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
   <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
   <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
@@ -256,10 +302,9 @@ a{text-decoration: none; color: black;}
   <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
   <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
 </svg>
-<form>
     <div class="modal_incontent">
     
-    	<select name='store'>
+    	<select name='select'>
   			<option value='0'>-- 선택 --</option>
   			<option value='1' ${search.select == 1 ? 'selected' : '' }>상점명</option>
   			<option value='2' ${search.select == 2 ? 'selected' : '' }>주소</option>
@@ -267,10 +312,10 @@ a{text-decoration: none; color: black;}
   			<option value='4' ${search.select == 4 ? 'selected' : '' }>카테고리</option>
 		</select>
 				<div class="col-5">
-					<input type="text" name="keyword" class="form-control form-control-sm" value="${search.keyword}">
+					<input type="text" name="keyword" class="searchKW" value="${search.keyword}">
 				</div>
 				<div class="col-2">
-					<input type="submit" value="검색" class="btn btn-primary btn-sm">
+					<button id="submit" class="btn btn-primary btn-sm">검색</button>
 				</div>
 			</div>
 <!-- 		<input type="text" placeholder="검색어를 입력하세요">
@@ -278,8 +323,7 @@ a{text-decoration: none; color: black;}
   		<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
 		</svg> -->
 		
-    </div>
-</form>
+    
   </div>
 </div>  
  
@@ -334,7 +378,7 @@ var marker = new naver.maps.Marker(markerOptions); */
 		map : map
 		title */
 }; 
-var marker = new naver.maps.Marker(markerOptions);
+//var marker = new naver.maps.Marker(markerOptions);
 
 
 //범죄지도 따라하기
