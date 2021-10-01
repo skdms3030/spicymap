@@ -116,6 +116,11 @@ public class MapController {
 			return videoList;
 	 }
 	
+	 
+	 @RequestMapping("/setting")
+	 public String setting() {
+		 return path + "setting";
+	 }
 	
 
 	 

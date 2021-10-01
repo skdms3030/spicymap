@@ -1,36 +1,49 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
-	<script src="/resources/jq/jquery.js"></script>
-	    <style>
-        body{
-            height: auto;}
+<style type="text/css">
+    /* 헤더 */
+    .header{
+        width: 100%;
+        height: 50px;
+        background-color: white;
+        margin : 5px 0;
+    }
+    .header div{
+    	display : inline-block;
+    }
+    #logo{
+    	height : 50px;
+    	padding-left : 20px;
+    }
+    #logo img{
+    	height : 100%;
+    }
+    #menus{
+    	float : right;
+    	margin-right : 20px;
+    }
+    .menu svg{
+    	height : 50px;
+    	width : 30px;
+    	padding : 0 5px;
+    	cursor:pointer;
+    }
+    
+
         a{text-decoration: none;color: black;}
-        .align{width: 150px; height: 100%; margin: auto;}
-        #logo{width: 150px; margin-top: 100%;}
         .button{ margin-top: 10px;}
-        #login{ width: 100%;}
-        #logout{ width: 100%;}
+        #logout{ width: 100%; padding:20px;}
         .button img{width: 150px;}
-        .notMember{padding: 5px;font-size: 5px;float: right;}
-    </style>
+</style>
 </head>
 <body>
-
-<div class="align">
-    <img id="logo" src="/resources/image/logo.png">
-
-      <!-- 아래와같이 아이디를 꼭 써준다. -->
-      <a id="naverIdLogin_loginButton" href="javascript:void(0)">
-            <div class="button" id="login">
-                <img src="/resources/image/naver_login2.png">
-            </div>
-      </a>
+<!-- 헤더 -->
+<jsp:include page="../include/header.jsp"></jsp:include>
 
 	<div onclick="naverLogout(); return false;">
       <a href="javascript:void(0)">
@@ -40,8 +53,6 @@
       </a>
 	</div>
 
-    <a href="map/"><p class="notMember">비회원 이용</p></a>
-</div>
 
 
 
@@ -51,10 +62,14 @@
 
 <script>
 
+$("#logout").click(function(){
+	
+});
+
 var naverLogin = new naver.LoginWithNaverId(
 		{
 			clientId: "G9Ycg2BdCUzKJQbVYrIn", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
-			callbackUrl: "http://172.16.144.109:9090/map/", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
+			callbackUrl: "http://localhost:9090/map", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
 			isPopup: false,
 			callbackHandle: true
 		}
@@ -83,21 +98,25 @@ window.addEventListener('load', function () {
 
 var testPopUp;
 function openPopUp() {
-    testPopUp= window.open("https://nid.naver.com/nidlogin.logout", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1");
+    testPopUp= window.open("https://nid.naver.com/nidlogin.logout", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,width=200,height=100");
 }
 function closePopUp(){
     testPopUp.close();
 }
 
+
+
 function naverLogout() {
 	openPopUp();
 	setTimeout(function() {
 		closePopUp();
-		}, 1000);
+		},);
+	alert("로그아웃 되었습니다.")
 	
-	
+	setTimeout(function(){
+	window.location.href = "http://172.16.144.109:9090/";
+}, 1500);
 }
 </script>
-
 </body>
 </html>

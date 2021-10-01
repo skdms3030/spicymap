@@ -140,7 +140,7 @@
 									var marker = new naver.maps.Marker({
 										position : new naver.maps.LatLng(data[i].storePointX, data[i].storePointY),
 										map : map,
-										title : 'loc_'+id
+										title : 'loc_'+data[i].storeId
 										});  //markerOptions 끝
 									
 									/* var marker = new naver.maps.Marker(markerOptions);*/
@@ -257,7 +257,12 @@ a{text-decoration: none; color: black;}
   z-index:2000;
 }
 .search_modal .modal_content .close_icon{width:30px; height:30px; position: absolute; right: 5%; top:10px;}
-.search_modal .modal_incontent{position:absolute; top:50%; left:50%; transform:translate(-50%, -50%);}
+.search_modal .modal_incontent{position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); width:200px;}
+
+
+.select{margin:10px; width:200px; height:30px;}
+.searchKW{margin:10px; width:192px; height:30px;}
+#submit{margin:10px; width:200px; height:30px;}
 
 
 </style>
@@ -304,17 +309,17 @@ a{text-decoration: none; color: black;}
 </svg>
     <div class="modal_incontent">
     
-    	<select name='select'>
+    	<select name='select' class="select">
   			<option value='0'>-- 선택 --</option>
   			<option value='1' ${search.select == 1 ? 'selected' : '' }>상점명</option>
   			<option value='2' ${search.select == 2 ? 'selected' : '' }>주소</option>
   			<option value='3' ${search.select == 3 ? 'selected' : '' }>전화번호</option>
   			<option value='4' ${search.select == 4 ? 'selected' : '' }>카테고리</option>
 		</select>
-				<div class="col-5">
-					<input type="text" name="keyword" class="searchKW" value="${search.keyword}">
+				<div>
+					<input type="text" name="keyword" class="searchKW" value="${search.keyword}" placeholder="검색어를 입력하세요">
 				</div>
-				<div class="col-2">
+				<div>
 					<button id="submit" class="btn btn-primary btn-sm">검색</button>
 				</div>
 			</div>
@@ -328,27 +333,7 @@ a{text-decoration: none; color: black;}
 </div>  
  
  
-<!-- 검색 참고 -->
-<%-- 			<form>
-			<div class="row">
-				<div class="col-3"></div>
-				<div class="col-2">
-				<select name="search" class="form-control form-control-sm">
-					<option value="0">전체 검색</option>
-					<option value="1" ${pager.search == 1 ? 'selected' : '' }>도서번호</option>
-					<option value="2" ${pager.search == 2 ? 'selected' : '' }>도서명</option>
-					<option value="3" ${pager.search == 3 ? 'selected' : '' }>출판사</option>
-					<option value="4" ${pager.search == 4 ? 'selected' : '' }>가격</option>
-				</select>
-				</div>
-				<div class="col-5">
-					<input type="text" name="keyword" class="form-control form-control-sm" value="${pager.keyword}">
-				</div>
-				<div class="col-2">
-					<input type="submit" value="검색" class="btn btn-primary btn-sm">
-				</div>
-			</div>
-			</form>   --%> 
+
    
 <script id="code">
 
@@ -381,7 +366,7 @@ var marker = new naver.maps.Marker(markerOptions); */
 //var marker = new naver.maps.Marker(markerOptions);
 
 
-//범죄지도 따라하기
+//따라하기
 /* var marker = new naver.maps.Marker({
 	position : new naver.maps.LatLng(37.3595704, 127.105399),
 	map : map,
