@@ -54,7 +54,7 @@
 var naverLogin = new naver.LoginWithNaverId(
 		{
 			clientId: "G9Ycg2BdCUzKJQbVYrIn", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
-			callbackUrl: "http://172.16.144.109:9090/map/", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
+			callbackUrl: "http://192.168.123.102:9090/map/", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
 			isPopup: false,
 			callbackHandle: true
 		}

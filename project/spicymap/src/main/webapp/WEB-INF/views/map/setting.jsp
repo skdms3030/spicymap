@@ -114,7 +114,7 @@ function naverLogout() {
 	alert("로그아웃 되었습니다.")
 	
 	setTimeout(function(){
-	window.location.href = "http://172.16.144.109:9090/";
+	window.location.href = "http://192.168.123.102:9090/";
 }, 1500);
 }
 </script>
